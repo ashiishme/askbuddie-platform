@@ -14,21 +14,21 @@ let ab_services_radius = [25,35,40,40];
 let angle = [60,100,160, 220];
 let canvas_bg_color = "rgba(0,0,0,0.04)";
 let primary_color = "rgba(126,87,194,1)";
-let meteroids_color = "rgba(0,0,0,0.5)";
+let meteoroids_color = "rgba(0,0,0,0.5)";
 let orbit_color = "rgba(0,0,0,0.2)";
 let ab_services_names = ["Blog", "Forum", "Free Hosting", "Open Source"];
-let meteroids = [];
+let meteoroids = [];
 let isNormal = true;
 
 function galaxy_color_switch() {
 	if(isNormal) {
 		canvas.style.backgroundColor = "black";
-		meteroids_color = "rgba(255,255,255,0.5)";
+		meteoroids_color = "rgba(255,255,255,0.5)";
 		orbit_color = "rgba(255,255,255,0.2)";
 		isNormal = false;
 	} else {
 		canvas.style.backgroundColor = canvas_bg_color;
-		meteroids_color = "rgba(0,0,0,0.5)";
+		meteoroids_color = "rgba(0,0,0,0.5)";
 		orbit_color = "rgba(0,0,0,0.2)";
 		isNormal = true;
 	}
@@ -37,7 +37,7 @@ function galaxy_color_switch() {
 
 switch_btn.addEventListener('click', galaxy_color_switch);
 
-function Meteroid(x, y, dx, dy, radius) {
+function Meteoroid(x, y, dx, dy, radius) {
 	this.x = x;
 	this.y = y;
 	this.dx = dx;
@@ -48,7 +48,7 @@ function Meteroid(x, y, dx, dy, radius) {
 		context.beginPath();
 		context.arc(this.x, this.y, this.radius, Math.PI * 2, false);
 		context.fill();
-		context.fillStyle = meteroids_color;
+		context.fillStyle = meteoroids_color;
 	}
 
 	this.update = function() {
@@ -67,14 +67,14 @@ function Meteroid(x, y, dx, dy, radius) {
 	}
 }
 
-(function ab_gen_meteroids() {
+(function ab_gen_meteoroids() {
 	for (let i = 0; i < 500; i++) {
 		let radius = Math.random() * 3;
 		let x = Math.random() * (width - radius * 2) + radius;
 		let y = Math.random() * (height - radius * 2) + radius;
 		let dx = (Math.random() - 0.5);
 		let dy = (Math.random() - 0.5);
-		meteroids.push(new Meteroid(x, y, dx, dy, radius));
+		meteoroids.push(new Meteoroid(x, y, dx, dy, radius));
 	}
 })();
 
@@ -141,8 +141,8 @@ function ab_services() {
 function render() {
 	requestAnimationFrame(render);
 	context.clearRect(0,0,width,height);
-	for(let i = 0; i < meteroids.length; i++) {
-		meteroids[i].update();
+	for(let i = 0; i < meteoroids.length; i++) {
+		meteoroids[i].update();
 	}
 	for(let i = 0; i < 4; i++) {
 		angle[i] += velocity[i];
